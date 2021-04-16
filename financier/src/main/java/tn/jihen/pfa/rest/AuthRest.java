@@ -9,6 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import tn.jihen.pfa.Service.CompteService;
 import tn.jihen.pfa.dao.*;
 import tn.jihen.pfa.model.*;
 import tn.jihen.pfa.payload.request.LoginRequest;
@@ -35,7 +36,7 @@ public class AuthRest {
     @Autowired
     PasswordEncoder passwordEncoder;
     @Autowired
-    CompteDao compteDao;
+    CompteService compteService;
     @Autowired
     RoleDao  roleDao;
     @Autowired
@@ -60,7 +61,7 @@ public class AuthRest {
     @PostMapping("/signup")
     //@PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> signup(@Valid @RequestBody SignupRequest signupRequest){
-     if (compteDao.existsByLogin(signupRequest.getLogin())){
+     if (compteService.existByLogin(signupRequest.getLogin())){
          return ResponseEntity.badRequest().body(new MessageResponse("login indisponible"));
      }
      if (personneDao.existsByNumeroIdentificateur(signupRequest.getNumeroIdentificateur())){
@@ -106,7 +107,7 @@ public class AuthRest {
             }
         });
         compte.setRoles(roles);
-        compteDao.save(compte);
+        compteService.addCompte(compte);
         return ResponseEntity.ok(new MessageResponse("votre compte est crée avec succée!!"));
     }
 
