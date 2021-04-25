@@ -4,9 +4,8 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
-@Entity
-public class Transaction {
-    @Id
+public class TransactionCopy {
+  /*  @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idTransaction;
     private LocalDate date;
@@ -17,12 +16,13 @@ public class Transaction {
     private ModaliteTransaction modaliteTransaction;
     @ManyToOne(cascade=CascadeType.ALL)
     private Session session;
+
     private String remarques;
 
-    public Transaction() {
+    public TransactionCopy() {
     }
 
-    public Transaction(LocalDate date, Float montant, TypeTransaction typeTransaction, ModaliteTransaction dmodaliteTransaction, Session session, String remarques) {
+    public TransactionCopy(LocalDate date, Float montant, TypeTransaction typeTransaction, ModaliteTransaction dmodaliteTransaction, Session session, String remarques) {
         this.date = date;
         this.montant = montant;
         this.typeTransaction = typeTransaction;
@@ -91,7 +91,7 @@ public class Transaction {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Transaction that = (Transaction) o;
+        TransactionCopy that = (TransactionCopy) o;
         return Objects.equals(idTransaction, that.idTransaction) &&
                 Objects.equals(date, that.date) &&
                 Objects.equals(montant, that.montant) &&
@@ -118,4 +118,6 @@ public class Transaction {
                 ", remarques='" + remarques + '\'' +
                 '}';
     }
+
+ */
 }

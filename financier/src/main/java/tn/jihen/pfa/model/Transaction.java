@@ -2,34 +2,38 @@ package tn.jihen.pfa.model;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Objects;
 
 @Entity
-@Table
 public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idTransaction;
-    private LocalDate date;
-    private Float montant;
-    @ManyToOne(cascade=CascadeType.ALL)
-    private TypeTransaction typeTransaction;
-    @ManyToOne(cascade=CascadeType.ALL)
-    private ModaliteTransaction modaliteTransaction;
-    @ManyToOne(cascade=CascadeType.ALL)
+    private String type;
+    private String modalite;
+    private LocalDate datePayement;
+    @OneToOne
+    private Employer idFinancier;
+    @OneToOne
+    private Personne idClient;
+    @OneToOne
     private Session session;
-    private String remarques;
+    private String status;
+    private float montant;
 
-    public Transaction() {
+    public Transaction(String type, String modalite,
+                       LocalDate datePayement, Employer idFinancier, Personne idClient,
+                       Session session, String status, Float montant) {
+        this.type = type;
+        this.modalite = modalite;
+        this.datePayement = datePayement;
+        this.idFinancier = idFinancier;
+        this.idClient = idClient;
+        this.session = session;
+        this.status = status;
+        this.montant = montant;
     }
 
-    public Transaction(LocalDate date, Float montant, TypeTransaction typeTransaction, ModaliteTransaction dmodaliteTransaction, Session session, String remarques) {
-        this.date = date;
-        this.montant = montant;
-        this.typeTransaction = typeTransaction;
-        this.modaliteTransaction = dmodaliteTransaction;
-        this.session = session;
-        this.remarques = remarques;
+    public Transaction() {
     }
 
     public Integer getIdTransaction() {
@@ -40,36 +44,44 @@ public class Transaction {
         this.idTransaction = idTransaction;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public String getType() {
+        return type;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public Float getMontant() {
-        return montant;
+    public String getModalite() {
+        return modalite;
     }
 
-    public void setMontant(Float montant) {
-        this.montant = montant;
+    public void setModalite(String modalite) {
+        this.modalite = modalite;
     }
 
-    public TypeTransaction getTypeTransaction() {
-        return typeTransaction;
+    public LocalDate getDatePayement() {
+        return datePayement;
     }
 
-    public void setTypeTransaction(TypeTransaction typeTransaction) {
-        this.typeTransaction = typeTransaction;
+    public void setDatePayement(LocalDate datePayement) {
+        this.datePayement = datePayement;
     }
 
-    public ModaliteTransaction getModaliteTransaction() {
-        return modaliteTransaction;
+    public Employer getIdFinancier() {
+        return idFinancier;
     }
 
-    public void setModaliteTransaction(ModaliteTransaction dmodaliteTransaction) {
-        this.modaliteTransaction = dmodaliteTransaction;
+    public void setIdFinancier(Employer idFinancier) {
+        this.idFinancier = idFinancier;
+    }
+
+    public Personne getIdClient() {
+        return idClient;
+    }
+
+    public void setIdClient(Personne idClient) {
+        this.idClient = idClient;
     }
 
     public Session getSession() {
@@ -80,43 +92,34 @@ public class Transaction {
         this.session = session;
     }
 
-    public String getRemarques() {
-        return remarques;
+    public String getStatus() {
+        return status;
     }
 
-    public void setRemarques(String remarques) {
-        this.remarques = remarques;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Transaction that = (Transaction) o;
-        return Objects.equals(idTransaction, that.idTransaction) &&
-                Objects.equals(date, that.date) &&
-                Objects.equals(montant, that.montant) &&
-                Objects.equals(typeTransaction, that.typeTransaction) &&
-                Objects.equals(modaliteTransaction, that.modaliteTransaction) &&
-                Objects.equals(session, that.session) &&
-                Objects.equals(remarques, that.remarques);
+    public float getMontant() {
+        return montant;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(idTransaction, date, montant, typeTransaction, modaliteTransaction, session, remarques);
+    public void setMontant(float montant) {
+        this.montant = montant;
     }
 
     @Override
     public String toString() {
         return "Transaction{" +
                 "idTransaction=" + idTransaction +
-                ", date=" + date +
-                ", montant=" + montant +
-                ", typeTransaction=" + typeTransaction +
-                ", dmodaliteTransaction=" + modaliteTransaction +
+                ", type=" + type +
+                ", modalite=" + modalite +
+                ", datePayement=" + datePayement +
+                ", idFinancier=" + idFinancier +
+                ", idClient=" + idClient +
                 ", session=" + session +
-                ", remarques='" + remarques + '\'' +
+                ", status=" + status +
+                ", montant=" + montant +
                 '}';
     }
 }

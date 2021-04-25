@@ -5,14 +5,69 @@ import javax.validation.constraints.NotNull;
 
 public class TransactionRequest {
     @NotNull
-    private Float montant;
+    private int type;
+    @NotNull
+     private int modalite;
     @NotBlank
-    private String typeTransaction;
-    @NotBlank
-    private String modaliteTransaction;
-    @NotBlank
-    private String session;
-    private String remarques;
+    private String datePayement;
+    @NotNull
+    private int idFinancier;
+    @NotNull
+    private int idClient;
+    @NotNull
+    private int session;
+    @NotNull
+    private int status;
+    @NotNull
+    private float montant;
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public String getDatePayement() {
+        return datePayement;
+    }
+
+    public void setDatePayement(String datePayement) {
+        this.datePayement = datePayement;
+    }
+
+    public int getIdFinancier() {
+        return idFinancier;
+    }
+
+    public void setIdFinancier(int idFinancier) {
+        this.idFinancier = idFinancier;
+    }
+
+    public int getIdClient() {
+        return idClient;
+    }
+
+    public void setIdClient(int idClient) {
+        this.idClient = idClient;
+    }
+
+    public int getSession() {
+        return session;
+    }
+
+    public void setSession(int session) {
+        this.session = session;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
     public Float getMontant() {
         return montant;
@@ -22,35 +77,11 @@ public class TransactionRequest {
         this.montant = montant;
     }
 
-    public String getTypeTransaction() {
-        return typeTransaction;
+    public int getModalite() {
+        return modalite;
     }
 
-    public void setTypeTransaction(String typeTransaction) {
-        this.typeTransaction = typeTransaction;
-    }
-
-    public String getModaliteTransaction() {
-        return modaliteTransaction;
-    }
-
-    public void setModaliteTransaction(String modaliteTransaction) {
-        this.modaliteTransaction = modaliteTransaction;
-    }
-
-    public String getSession() {
-        return session;
-    }
-
-    public void setSession(String session) {
-        this.session = session;
-    }
-
-    public String getRemarques() {
-        return remarques;
-    }
-
-    public void setRemarques(String remarques) {
-        this.remarques = remarques;
+    public void setModalite(int modalite) {
+        this.modalite = modalite;
     }
 }
