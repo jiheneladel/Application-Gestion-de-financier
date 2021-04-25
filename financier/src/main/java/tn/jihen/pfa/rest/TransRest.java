@@ -12,6 +12,8 @@ import tn.jihen.pfa.util.StudentDebt;
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Collection;
+import java.util.Set;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -37,12 +39,13 @@ public class TransRest {
     EtudiantsDao etudiantsDao;
     @Autowired
     StudentDebt studentDebt;
+    @Autowired
+    ModaliteTransactionDao modaliteTransactionDao;
 
     @PostMapping("/add")
     public ResponseEntity<?> add(@Valid @RequestBody TransactionRequest transactionRequest) {
         String type;
         String status = "";
-        String modalite = "";
         if (transactionRequest.getType() == 1) {
             type = ETypeTransaction.DEBIT.name();
         } else {
@@ -63,20 +66,9 @@ public class TransRest {
             }
 
         }
-        switch (transactionRequest.getModalite()) {
-            case 1: {
-                modalite = EModaliteTransaction.CHEQUE.name();
-                break;
-            }
-            case 2: {
-                modalite = EModaliteTransaction.ESPECE.name();
-                break;
-            }
-            case 3: {
-                modalite = EModaliteTransaction.VIREMENT.name();
-                break;
-            }
-        }
+
+        Set<ModaliteTransaction> modaliteTransactions = transactionRequest.getModalite();
+        System.out.println(modaliteTransactions);
         Personne personne = personneDao.findById(transactionRequest.getIdFinancier())
                 .orElseThrow(() -> new RuntimeException("erreur Personne not found!"));
         Session session = sessionDao.findById(transactionRequest.getSession())
@@ -94,7 +86,7 @@ public class TransRest {
 
         }
 
-        Transaction transaction = new Transaction(type, modalite, localDate, employer, personne, session, status,
+        Transaction transaction = new Transaction(type, modaliteTransactions, localDate, employer, personne, session, status,
                 transactionRequest.getMontant());
         transactionDao.save(transaction);
         return ResponseEntity.ok(new MessageResponse("votre transaction est effectuer avec succée!!"));

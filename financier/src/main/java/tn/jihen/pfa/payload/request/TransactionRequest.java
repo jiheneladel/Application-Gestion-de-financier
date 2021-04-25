@@ -1,13 +1,16 @@
 package tn.jihen.pfa.payload.request;
 
+import tn.jihen.pfa.model.ModaliteTransaction;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 public class TransactionRequest {
     @NotNull
     private int type;
     @NotNull
-     private int modalite;
+     private Set<ModaliteTransaction> modalite;
     @NotBlank
     private String datePayement;
     @NotNull
@@ -77,11 +80,11 @@ public class TransactionRequest {
         this.montant = montant;
     }
 
-    public int getModalite() {
+    public Set<ModaliteTransaction> getModalite() {
         return modalite;
     }
 
-    public void setModalite(int modalite) {
+    public void setModalite(Set<ModaliteTransaction> modalite) {
         this.modalite = modalite;
     }
 }

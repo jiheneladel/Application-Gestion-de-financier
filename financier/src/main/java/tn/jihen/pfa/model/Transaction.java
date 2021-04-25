@@ -2,6 +2,7 @@ package tn.jihen.pfa.model;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Collection;
 
 @Entity
 public class Transaction {
@@ -9,7 +10,8 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idTransaction;
     private String type;
-    private String modalite;
+    @OneToMany
+    private Collection<ModaliteTransaction> modalite;
     private LocalDate datePayement;
     @OneToOne
     private Employer idFinancier;
@@ -20,7 +22,7 @@ public class Transaction {
     private String status;
     private float montant;
 
-    public Transaction(String type, String modalite,
+    public Transaction(String type, Collection<ModaliteTransaction> modalite,
                        LocalDate datePayement, Employer idFinancier, Personne idClient,
                        Session session, String status, Float montant) {
         this.type = type;
@@ -52,11 +54,11 @@ public class Transaction {
         this.type = type;
     }
 
-    public String getModalite() {
+    public Collection<ModaliteTransaction> getModalite() {
         return modalite;
     }
 
-    public void setModalite(String modalite) {
+    public void setModalite(Collection<ModaliteTransaction> modalite) {
         this.modalite = modalite;
     }
 
