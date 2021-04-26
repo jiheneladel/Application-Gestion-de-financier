@@ -9,7 +9,9 @@ public class Role {
     @Enumerated(EnumType.STRING)
     private ERole role;
 
-
+    public Role(ERole role) {
+        this.role = role;
+    }
 
     public Role() {
     }

@@ -2,6 +2,7 @@ package tn.jihen.pfa.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import tn.jihen.pfa.dao.*;
 import tn.jihen.pfa.model.*;
@@ -12,12 +13,13 @@ import tn.jihen.pfa.util.StudentDebt;
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/trans/")
+@PreAuthorize("hasRole('ADMIN')")
 public class TransRest {
     // @Autowired
     //TypeTransactionDao typeTransactionDao;
@@ -64,11 +66,10 @@ public class TransRest {
                 status = EStatus.COMPLETE.name();
                 break;
             }
-
         }
 
         Set<ModaliteTransaction> modaliteTransactions = transactionRequest.getModalite();
-        System.out.println(modaliteTransactions);
+        List<ModaliteTransaction> modaliteTransactionList = modaliteTransactionDao.saveAll(modaliteTransactions);
         Personne personne = personneDao.findById(transactionRequest.getIdFinancier())
                 .orElseThrow(() -> new RuntimeException("erreur Personne not found!"));
         Session session = sessionDao.findById(transactionRequest.getSession())
@@ -86,7 +87,7 @@ public class TransRest {
 
         }
 
-        Transaction transaction = new Transaction(type, modaliteTransactions, localDate, employer, personne, session, status,
+        Transaction transaction = new Transaction(type, modaliteTransactionList, localDate, employer, personne, session, status,
                 transactionRequest.getMontant());
         transactionDao.save(transaction);
         return ResponseEntity.ok(new MessageResponse("votre transaction est effectuer avec succée!!"));
