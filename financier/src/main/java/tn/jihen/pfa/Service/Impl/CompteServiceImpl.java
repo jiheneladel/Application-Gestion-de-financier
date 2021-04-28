@@ -15,7 +15,7 @@ public class CompteServiceImpl implements CompteService {
     }
 
     @Override
-    public void addCompte(Compte compte) {
-        compteDao.save(compte);
+    public Compte addCompte(Compte compte) {
+        return compteDao.save(compte);
     }
 }

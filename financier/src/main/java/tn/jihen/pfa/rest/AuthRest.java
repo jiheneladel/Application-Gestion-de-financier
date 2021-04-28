@@ -14,6 +14,7 @@ import tn.jihen.pfa.dao.*;
 import tn.jihen.pfa.model.*;
 import tn.jihen.pfa.payload.request.LoginRequest;
 import tn.jihen.pfa.payload.request.SignupRequest;
+import tn.jihen.pfa.payload.request.StudentRequest;
 import tn.jihen.pfa.payload.response.JwtResponse;
 import tn.jihen.pfa.payload.response.MessageResponse;
 import tn.jihen.pfa.security.jwt.JwtUtils;
@@ -24,6 +25,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -38,7 +40,7 @@ public class AuthRest {
     @Autowired
     CompteService compteService;
     @Autowired
-    RoleDao  roleDao;
+    RoleDao roleDao;
     @Autowired
     JwtUtils jwtUtils;
     @Autowired
@@ -47,8 +49,21 @@ public class AuthRest {
     IdentificateurDao identificateurDao;
     @Autowired
     NationaliteDao nationaliteDao;
+    @Autowired
+    EtudiantsDao etudiantsDao;
+    @Autowired
+    ContactEtudiantDao contactEtudiant;
+    @Autowired
+    InsecriptionDao insecriptionDao;
+    @Autowired
+    DiplomeEtudiantDao diplomeEtudiantDao;
+    @Autowired
+    DiplomeDao diplomeDao;
+    @Autowired
+    EtatInscriptionDao etatInscriptionDao;
+
     @PostMapping("/login")
-    public ResponseEntity<?> login(@Valid @RequestBody LoginRequest loginRequest){
+    public ResponseEntity<?> login(@Valid @RequestBody LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getLogin(),
                         loginRequest.getPassword()));
@@ -56,28 +71,29 @@ public class AuthRest {
         String jwt = jwtUtils.generateJwtToken(authentication);
         CompteDetailsImpl compteDetails = (CompteDetailsImpl) authentication.getPrincipal();
         List<String> role = compteDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
-        return ResponseEntity.ok(new JwtResponse(jwt, compteDetails.getId(), role,compteDetails.getFirstname(), compteDetails.getLastname()));
+        return ResponseEntity.ok(new JwtResponse(jwt, compteDetails.getId(), role, compteDetails.getFirstname(), compteDetails.getLastname()));
     }
+
     @PostMapping("/signup")
     //@PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> signup(@Valid @RequestBody SignupRequest signupRequest){
-     if (compteService.existByLogin(signupRequest.getLogin())){
-         return ResponseEntity.badRequest().body(new MessageResponse("login indisponible"));
-     }
-     if (personneDao.existsByNumeroIdentificateur(signupRequest.getNumeroIdentificateur())){
-         return ResponseEntity.badRequest().body(new MessageResponse("numero identification deja existan!!"));
-     }
+    public Object signup(@Valid @RequestBody SignupRequest signupRequest) {
+        if (compteService.existByLogin(signupRequest.getLogin())) {
+            return ResponseEntity.badRequest().body(new MessageResponse("login indisponible"));
+        }
+        if (personneDao.existsByNumeroIdentificateur(signupRequest.getNumeroIdentificateur())) {
+            return ResponseEntity.badRequest().body(new MessageResponse("numero identification deja existan!!"));
+        }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-     LocalDate localDate;
+        LocalDate localDate;
         try {
             localDate = LocalDate.parse(signupRequest.getDateDeNaissance(), formatter);
-       }catch (Exception e){
-           return ResponseEntity.badRequest().body(new MessageResponse("date de naissance invalide!!"));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new MessageResponse("date de naissance invalide!!"));
 
-       }
-        Identificateur identificateur= identificateurDao.findByTypeIdentificateur(signupRequest.getTypeIdentificateur());
+        }
+        Identificateur identificateur = identificateurDao.findByTypeIdentificateur(signupRequest.getTypeIdentificateur());
         //identificateurDao.save(identificateur);
-        Nationalite nationalite =nationaliteDao.findByLibelle(signupRequest.getNationalite());
+        Nationalite nationalite = nationaliteDao.findByLibelle(signupRequest.getNationalite());
         //nationaliteDao.save(nationalite);
         Compte compte = new Compte(signupRequest.getLogin(), passwordEncoder.encode(signupRequest.getPassword()),
                 new Personne(signupRequest.getNom(), signupRequest.getPrenom(), signupRequest.getMail(),
@@ -88,9 +104,9 @@ public class AuthRest {
                         signupRequest.getSexe(),
                         nationalite));
         Set<String> role = signupRequest.getRole();
-        Set<Role> roles=new HashSet<>();
+        Set<Role> roles = new HashSet<>();
         role.forEach(s -> {
-            switch (s){
+            switch (s) {
                 case "admin":
                     Role role1 = roleDao.findByRole(ERole.ROLE_ADMIN)
                             .orElseThrow(() -> new RuntimeException("erreur role not found!"));
@@ -101,14 +117,47 @@ public class AuthRest {
                             .orElseThrow(() -> new RuntimeException("erreur role not found!"));
                     roles.add(role2);
                     break;
+                case "etudiant":
+                    Role role3 = roleDao.findByRole(ERole.ROLE_ETUDIANT)
+                            .orElseThrow(() -> new RuntimeException("erreur role not found!"));
+                    roles.add(role3);
                 default:
 
                     break;
             }
         });
         compte.setRoles(roles);
-        compteService.addCompte(compte);
-        return ResponseEntity.ok(new MessageResponse("votre compte est crée avec succée!!"));
+        return compteService.addCompte(compte);
+        //return ResponseEntity.ok(new MessageResponse("votre compte est crée avec succée!!"));
     }
 
+    @PostMapping("/addStudent")
+    public void addStudent(@Valid @RequestBody StudentRequest studentRequest) {
+        Optional<Personne> personne = personneDao.findById(studentRequest.getIdPersonne());
+        personne.ifPresent(personne1 -> {
+                    Etudiants etudiants = etudiantsDao.save(new Etudiants(personne1));
+                    studentRequest.getDiplomeRequest().forEach(diplomeRequest -> {
+                        Diplome diplome = diplomeDao.save(new Diplome(diplomeRequest.getNomDiplome()));
+                        diplomeEtudiantDao.save(new DiplomeEtudiant(diplome, etudiants, diplomeRequest.getAnnee(), diplomeRequest.getSpecialite(),
+                                diplomeRequest.getNiveau(), diplomeRequest.getStatus()));
+                    });
+                    studentRequest.getContactEtudiants().forEach(contactEtudiant1 -> {
+                        contactEtudiant.save(new ContactEtudiant(etudiants, contactEtudiant1.getNumero()
+                                , contactEtudiant1.getNom(), contactEtudiant1.getDesignation()));
+                    });
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    LocalDate date;
+                    date = LocalDate.parse(studentRequest.getDate(), formatter);
+                    EtatInscription etatInscription = etatInscriptionDao.findByNom(studentRequest.getEtatInscrit());
+                    insecriptionDao.save(new Inscription(etudiants, studentRequest.getNumeroInscrit(), date, etatInscription));
+                }
+
+        );
+
+    }
 }
+
+
+
+
+

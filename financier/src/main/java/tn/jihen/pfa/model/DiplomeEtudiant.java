@@ -16,8 +16,7 @@ public class DiplomeEtudiant {
     private Integer niveau;
     private String status;
 
-    public DiplomeEtudiant(Integer idDiplomeEtudiant, Diplome idDiplome, Etudiants idEtudiant, String annee, String specialite, Integer niveau, String status) {
-        this.idDiplomeEtudiant = idDiplomeEtudiant;
+    public DiplomeEtudiant(Diplome idDiplome, Etudiants idEtudiant, String annee, String specialite, Integer niveau, String status) {
         this.idDiplome = idDiplome;
         this.idEtudiant = idEtudiant;
         this.annee = annee;

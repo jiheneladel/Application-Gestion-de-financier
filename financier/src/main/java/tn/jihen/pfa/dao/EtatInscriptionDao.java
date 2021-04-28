@@ -5,4 +5,5 @@ import org.springframework.stereotype.Repository;
 import tn.jihen.pfa.model.EtatInscription;
 @Repository
 public interface EtatInscriptionDao extends JpaRepository<EtatInscription, Integer> {
+    EtatInscription findByNom(String nom);
 }

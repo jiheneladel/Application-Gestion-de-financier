@@ -10,8 +10,7 @@ public class Etudiants {
     @ManyToOne
     private Personne idPersonne;
 
-    public Etudiants(Integer idEtudiant, Personne idPersonne) {
-        this.idEtudiant = idEtudiant;
+    public Etudiants(Personne idPersonne) {
         this.idPersonne = idPersonne;
     }
 

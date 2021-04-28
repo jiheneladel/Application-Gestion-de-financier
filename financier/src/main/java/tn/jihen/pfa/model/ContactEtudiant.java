@@ -13,8 +13,8 @@ public class ContactEtudiant {
     private String nom;
     private String designation;
 
-    public ContactEtudiant(Integer idContact, Etudiants idEtudiant, String numero, String nom, String designation) {
-        this.idContact = idContact;
+    public ContactEtudiant(Etudiants idEtudiant, String numero, String nom, String designation) {
+
         this.idEtudiant = idEtudiant;
         this.numero = numero;
         this.nom = nom;

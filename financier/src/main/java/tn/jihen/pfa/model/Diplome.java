@@ -12,8 +12,7 @@ public class Diplome {
     private Integer idDiplome;
     private String nomDiplome;
 
-    public Diplome(Integer idDiplome, String nomDiplome) {
-        this.idDiplome = idDiplome;
+    public Diplome(String nomDiplome) {
         this.nomDiplome = nomDiplome;
     }
 
