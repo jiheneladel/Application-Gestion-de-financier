@@ -62,15 +62,19 @@ public class TransRest {
                 status = EStatus.CANCELED.name();
                 break;
             }
-            default: {
+            case 3: {
                 status = EStatus.COMPLETE.name();
+                break;
+            }
+            case 4:{
+                status = EStatus.REJECTED.name();
                 break;
             }
         }
 
         Set<ModaliteTransaction> modaliteTransactions = transactionRequest.getModalite();
         List<ModaliteTransaction> modaliteTransactionList = modaliteTransactionDao.saveAll(modaliteTransactions);
-        Personne personne = personneDao.findById(transactionRequest.getIdFinancier())
+        Personne personne = personneDao.findById(transactionRequest.getIdClient())
                 .orElseThrow(() -> new RuntimeException("erreur Personne not found!"));
         Session session = sessionDao.findById(transactionRequest.getSession())
                 .orElseThrow(() -> new RuntimeException("erreur Session not found!"));
