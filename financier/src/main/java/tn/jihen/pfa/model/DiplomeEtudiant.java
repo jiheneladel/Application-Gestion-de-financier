@@ -15,14 +15,19 @@ public class DiplomeEtudiant {
     private String specialite;
     private Integer niveau;
     private String status;
+    private String etablissement;
 
-    public DiplomeEtudiant(Diplome idDiplome, Etudiants idEtudiant, String annee, String specialite, Integer niveau, String status) {
+
+    public DiplomeEtudiant(Diplome idDiplome, Etudiants idEtudiant,
+                           String annee, String specialite, Integer niveau, String status,
+                           String etablissement) {
         this.idDiplome = idDiplome;
         this.idEtudiant = idEtudiant;
         this.annee = annee;
         this.specialite = specialite;
         this.niveau = niveau;
         this.status = status;
+        this.etablissement = etablissement;
     }
 
     public DiplomeEtudiant() {
@@ -84,6 +89,14 @@ public class DiplomeEtudiant {
         this.status = status;
     }
 
+    public String getEtablissement() {
+        return etablissement;
+    }
+
+    public void setEtablissement(String etablissement) {
+        this.etablissement = etablissement;
+    }
+
     @Override
     public String toString() {
         return "DiplomeEtudiant{" +
@@ -94,6 +107,7 @@ public class DiplomeEtudiant {
                 ", specialite='" + specialite + '\'' +
                 ", niveau=" + niveau +
                 ", status='" + status + '\'' +
+                ", etablissement='" + etablissement + '\'' +
                 '}';
     }
 }

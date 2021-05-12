@@ -19,7 +19,7 @@ import java.util.Set;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/trans/")
-@PreAuthorize("hasRole('ADMIN')")
+//@PreAuthorize("hasRole('ADMIN')")
 public class TransRest {
     // @Autowired
     //TypeTransactionDao typeTransactionDao;

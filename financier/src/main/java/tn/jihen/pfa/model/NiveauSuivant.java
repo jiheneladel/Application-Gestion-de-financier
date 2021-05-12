@@ -10,9 +10,9 @@ public class NiveauSuivant {
     @OneToOne
     private Niveau idNiveau;
     @OneToOne
-    private NiveauSuivant idNiveauSuivant;
+    private Niveau idNiveauSuivant;
 
-    public NiveauSuivant(Niveau idNiveau, NiveauSuivant idNiveauSuivant) {
+    public NiveauSuivant(Niveau idNiveau, Niveau idNiveauSuivant) {
         this.idNiveau = idNiveau;
         this.idNiveauSuivant = idNiveauSuivant;
     }
@@ -36,11 +36,11 @@ public class NiveauSuivant {
         this.idNiveau = idNiveau;
     }
 
-    public NiveauSuivant getIdNiveauSuivant() {
+    public Niveau getIdNiveauSuivant() {
         return idNiveauSuivant;
     }
 
-    public void setIdNiveauSuivant(NiveauSuivant idNiveauSuivant) {
+    public void setIdNiveauSuivant(Niveau idNiveauSuivant) {
         this.idNiveauSuivant = idNiveauSuivant;
     }
 

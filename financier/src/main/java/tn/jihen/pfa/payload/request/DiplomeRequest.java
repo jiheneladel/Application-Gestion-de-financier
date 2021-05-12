@@ -12,8 +12,8 @@ public class DiplomeRequest {
     private int niveau;
     @NotBlank
     private String status;
-
-
+    @NotBlank
+    private String etablissement;
 
     public String getNomDiplome() {
         return nomDiplome;
@@ -53,5 +53,13 @@ public class DiplomeRequest {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getEtablissement() {
+        return etablissement;
+    }
+
+    public void setEtablissement(String etablissement) {
+        this.etablissement = etablissement;
     }
 }

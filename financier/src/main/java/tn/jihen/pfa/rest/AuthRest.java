@@ -112,15 +112,31 @@ public class AuthRest {
                             .orElseThrow(() -> new RuntimeException("erreur role not found!"));
                     roles.add(role1);
                     break;
-                case "financier":
-                    Role role2 = roleDao.findByRole(ERole.ROLE_FINANCIER)
+                case "scolarite":
+                    Role role2 = roleDao.findByRole(ERole.ROLE_SCOLARITE)
                             .orElseThrow(() -> new RuntimeException("erreur role not found!"));
                     roles.add(role2);
                     break;
-                case "etudiant":
-                    Role role3 = roleDao.findByRole(ERole.ROLE_ETUDIANT)
+                case "financier":
+                    Role role3 = roleDao.findByRole(ERole.ROLE_FINANCIER)
                             .orElseThrow(() -> new RuntimeException("erreur role not found!"));
                     roles.add(role3);
+                    break;
+                case "examen":
+                    Role role4 = roleDao.findByRole(ERole.ROLE_EXAMEN)
+                            .orElseThrow(() -> new RuntimeException("erreur role not found!"));
+                    roles.add(role4);
+                    break;
+                case "etudiant":
+                    Role role5 = roleDao.findByRole(ERole.ROLE_ETUDIANT)
+                            .orElseThrow(() -> new RuntimeException("erreur role not found!"));
+                    roles.add(role5);
+                    break;
+                case "directeur":
+                    Role role6 = roleDao.findByRole(ERole.ROLE_DIRECTEUR)
+                            .orElseThrow(() -> new RuntimeException("erreur role not found!"));
+                    roles.add(role6);
+                    break;
                 default:
 
                     break;
@@ -139,7 +155,7 @@ public class AuthRest {
                     studentRequest.getDiplomeRequest().forEach(diplomeRequest -> {
                         Diplome diplome = diplomeDao.save(new Diplome(diplomeRequest.getNomDiplome()));
                         diplomeEtudiantDao.save(new DiplomeEtudiant(diplome, etudiants, diplomeRequest.getAnnee(), diplomeRequest.getSpecialite(),
-                                diplomeRequest.getNiveau(), diplomeRequest.getStatus()));
+                                diplomeRequest.getNiveau(), diplomeRequest.getStatus(),diplomeRequest.getEtablissement()));
                     });
                     studentRequest.getContactEtudiants().forEach(contactEtudiant1 -> {
                         contactEtudiant.save(new ContactEtudiant(etudiants, contactEtudiant1.getNumero()
