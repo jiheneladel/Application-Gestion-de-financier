@@ -97,12 +97,12 @@ public class TransRest {
         return ResponseEntity.ok(new MessageResponse("votre transaction est effectuer avec succée!!"));
     }
 
-    @GetMapping("/debtstudent/{idetudiant}/{idsession}")
-    public double getStudentDebt(@PathVariable int idetudiant, @PathVariable int idsession) {
+   /* @GetMapping("/debtstudent/{idetudiant}/{idsession}")
+        public double getStudentDebt(@PathVariable int idetudiant, @PathVariable int idsession) {
         Etudiants etudiants = etudiantsDao.findById(idetudiant)
                 .orElseThrow(() -> new RuntimeException("Student not found"));
         Session session = sessionDao.findById(idsession)
                 .orElseThrow(() -> new RuntimeException("Session not found"));
         return studentDebt.debt(etudiants, session);
-    }
+    }*/
 }
