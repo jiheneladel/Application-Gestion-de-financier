@@ -7,8 +7,9 @@ import tn.jihen.pfa.model.Compte;
 import java.util.Optional;
 
 @Repository
-public interface CompteDao extends JpaRepository<Compte,Integer> {
+public interface CompteDao extends JpaRepository<Compte, Integer> {
     Optional<Compte> findByLogin(String login);
+
     Boolean existsByLogin(String login);
 
 }

@@ -10,7 +10,7 @@ public class TransactionRequest {
     @NotNull
     private int type;
     @NotNull
-     private Set<ModaliteTransaction> modalite;
+    private Set<ModaliteTransaction> modalite;
     @NotBlank
     private String datePayement;
     @NotNull

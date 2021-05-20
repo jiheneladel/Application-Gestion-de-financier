@@ -12,7 +12,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class CompteDetailsImpl implements UserDetails {
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
     @JsonIgnore
     private final String password;
     private final Integer id;
@@ -29,16 +29,17 @@ public class CompteDetailsImpl implements UserDetails {
         this.firstname = firstname;
         this.lastname = lastname;
     }
-public static CompteDetailsImpl build(Compte compte){
-    List<GrantedAuthority> authorities = compte.getRoles().stream()
+
+    public static CompteDetailsImpl build(Compte compte) {
+        List<GrantedAuthority> authorities = compte.getRoles().stream()
             .map(role -> new SimpleGrantedAuthority(role.getRole().name()))
             .collect(Collectors.toList());
-    return new CompteDetailsImpl(
+        return new CompteDetailsImpl(
             compte.getPassword(),
             compte.getId(),
             compte.getLogin(),
             authorities, compte.getId_Personne().getNom(), compte.getId_Personne().getPrenom());
-}
+    }
 
     public Integer getId() {
         return id;

@@ -5,10 +5,12 @@ import org.springframework.stereotype.Service;
 import tn.jihen.pfa.Service.CompteService;
 import tn.jihen.pfa.dao.CompteDao;
 import tn.jihen.pfa.model.Compte;
+
 @Service
 public class CompteServiceImpl implements CompteService {
     @Autowired
     CompteDao compteDao;
+
     @Override
     public boolean existByLogin(String login) {
         return compteDao.existsByLogin(login);

@@ -1,7 +1,6 @@
 package tn.jihen.pfa.model;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
 import java.time.LocalDate;
 
 @Entity
@@ -80,12 +79,12 @@ public class Enregistrement {
     @Override
     public String toString() {
         return "Enregistrement{" +
-                "idEnregistrement=" + idEnregistrement +
-                ", idInscription=" + idInscription +
-                ", idNiveau=" + idNiveau +
-                ", idSession=" + idSession +
-                ", dateEnregistrement=" + dateEnregistrement +
-                ", etatFinanciere=" + etatFinanciere +
-                '}';
+            "idEnregistrement=" + idEnregistrement +
+            ", idInscription=" + idInscription +
+            ", idNiveau=" + idNiveau +
+            ", idSession=" + idSession +
+            ", dateEnregistrement=" + dateEnregistrement +
+            ", etatFinanciere=" + etatFinanciere +
+            '}';
     }
 }

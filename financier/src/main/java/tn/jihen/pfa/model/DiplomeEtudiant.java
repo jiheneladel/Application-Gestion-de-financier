@@ -100,14 +100,14 @@ public class DiplomeEtudiant {
     @Override
     public String toString() {
         return "DiplomeEtudiant{" +
-                "idDiplomeEtudiant=" + idDiplomeEtudiant +
-                ", idDiplome=" + idDiplome +
-                ", idEtudiant=" + idEtudiant +
-                ", annee='" + annee + '\'' +
-                ", specialite='" + specialite + '\'' +
-                ", niveau=" + niveau +
-                ", status='" + status + '\'' +
-                ", etablissement='" + etablissement + '\'' +
-                '}';
+            "idDiplomeEtudiant=" + idDiplomeEtudiant +
+            ", idDiplome=" + idDiplome +
+            ", idEtudiant=" + idEtudiant +
+            ", annee='" + annee + '\'' +
+            ", specialite='" + specialite + '\'' +
+            ", niveau=" + niveau +
+            ", status='" + status + '\'' +
+            ", etablissement='" + etablissement + '\'' +
+            '}';
     }
 }

@@ -1,6 +1,9 @@
 package tn.jihen.pfa.model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class TypeTransaction {
@@ -36,8 +39,8 @@ public class TypeTransaction {
     @Override
     public String toString() {
         return "TypeTransaction{" +
-                "idTypeTransaction=" + idTypeTransaction +
-                ", libelle='" + libelle + '\'' +
-                '}';
+            "idTypeTransaction=" + idTypeTransaction +
+            ", libelle='" + libelle + '\'' +
+            '}';
     }
 }

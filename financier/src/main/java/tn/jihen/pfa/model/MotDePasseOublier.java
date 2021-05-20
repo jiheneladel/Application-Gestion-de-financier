@@ -2,9 +2,11 @@ package tn.jihen.pfa.model;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+
 @Entity
 public class MotDePasseOublier {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer Id_MDPO;
     @OneToOne
     private Compte Id_Compte;
@@ -56,10 +58,10 @@ public class MotDePasseOublier {
     @Override
     public String toString() {
         return "MotDePasseOublier{" +
-                "Id_MDPO=" + Id_MDPO +
-                ", Id_Compte=" + Id_Compte +
-                ", Token='" + Token + '\'' +
-                ", dateExpiration=" + dateExpiration +
-                '}';
+            "Id_MDPO=" + Id_MDPO +
+            ", Id_Compte=" + Id_Compte +
+            ", Token='" + Token + '\'' +
+            ", dateExpiration=" + dateExpiration +
+            '}';
     }
 }

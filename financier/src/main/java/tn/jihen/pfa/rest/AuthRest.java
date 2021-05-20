@@ -65,8 +65,8 @@ public class AuthRest {
     @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getLogin(),
-                        loginRequest.getPassword()));
+            new UsernamePasswordAuthenticationToken(loginRequest.getLogin(),
+                loginRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
         CompteDetailsImpl compteDetails = (CompteDetailsImpl) authentication.getPrincipal();
@@ -96,45 +96,45 @@ public class AuthRest {
         Nationalite nationalite = nationaliteDao.findByLibelle(signupRequest.getNationalite());
         //nationaliteDao.save(nationalite);
         Compte compte = new Compte(signupRequest.getLogin(), passwordEncoder.encode(signupRequest.getPassword()),
-                new Personne(signupRequest.getNom(), signupRequest.getPrenom(), signupRequest.getMail(),
-                        signupRequest.getAdresse(), signupRequest.getTel(),
-                        localDate, signupRequest.getLieuDeNaissance(),
-                        identificateur,
-                        signupRequest.getNumeroIdentificateur(),
-                        signupRequest.getSexe(),
-                        nationalite));
+            new Personne(signupRequest.getNom(), signupRequest.getPrenom(), signupRequest.getMail(),
+                signupRequest.getAdresse(), signupRequest.getTel(),
+                localDate, signupRequest.getLieuDeNaissance(),
+                identificateur,
+                signupRequest.getNumeroIdentificateur(),
+                signupRequest.getSexe(),
+                nationalite));
         Set<String> role = signupRequest.getRole();
         Set<Role> roles = new HashSet<>();
         role.forEach(s -> {
             switch (s) {
                 case "admin":
                     Role role1 = roleDao.findByRole(ERole.ROLE_ADMIN)
-                            .orElseThrow(() -> new RuntimeException("erreur role not found!"));
+                        .orElseThrow(() -> new RuntimeException("erreur role not found!"));
                     roles.add(role1);
                     break;
                 case "scolarite":
                     Role role2 = roleDao.findByRole(ERole.ROLE_SCOLARITE)
-                            .orElseThrow(() -> new RuntimeException("erreur role not found!"));
+                        .orElseThrow(() -> new RuntimeException("erreur role not found!"));
                     roles.add(role2);
                     break;
                 case "financier":
                     Role role3 = roleDao.findByRole(ERole.ROLE_FINANCIER)
-                            .orElseThrow(() -> new RuntimeException("erreur role not found!"));
+                        .orElseThrow(() -> new RuntimeException("erreur role not found!"));
                     roles.add(role3);
                     break;
                 case "examen":
                     Role role4 = roleDao.findByRole(ERole.ROLE_EXAMEN)
-                            .orElseThrow(() -> new RuntimeException("erreur role not found!"));
+                        .orElseThrow(() -> new RuntimeException("erreur role not found!"));
                     roles.add(role4);
                     break;
                 case "etudiant":
                     Role role5 = roleDao.findByRole(ERole.ROLE_ETUDIANT)
-                            .orElseThrow(() -> new RuntimeException("erreur role not found!"));
+                        .orElseThrow(() -> new RuntimeException("erreur role not found!"));
                     roles.add(role5);
                     break;
                 case "directeur":
                     Role role6 = roleDao.findByRole(ERole.ROLE_DIRECTEUR)
-                            .orElseThrow(() -> new RuntimeException("erreur role not found!"));
+                        .orElseThrow(() -> new RuntimeException("erreur role not found!"));
                     roles.add(role6);
                     break;
                 default:
@@ -151,22 +151,22 @@ public class AuthRest {
     public void addStudent(@Valid @RequestBody StudentRequest studentRequest) {
         Optional<Personne> personne = personneDao.findById(studentRequest.getIdPersonne());
         personne.ifPresent(personne1 -> {
-                    Etudiants etudiants = etudiantsDao.save(new Etudiants(personne1));
-                    studentRequest.getDiplomeRequest().forEach(diplomeRequest -> {
-                        Diplome diplome = diplomeDao.save(new Diplome(diplomeRequest.getNomDiplome()));
-                        diplomeEtudiantDao.save(new DiplomeEtudiant(diplome, etudiants, diplomeRequest.getAnnee(), diplomeRequest.getSpecialite(),
-                                diplomeRequest.getNiveau(), diplomeRequest.getStatus(),diplomeRequest.getEtablissement()));
-                    });
-                    studentRequest.getContactEtudiants().forEach(contactEtudiant1 -> {
-                        contactEtudiant.save(new ContactEtudiant(etudiants, contactEtudiant1.getNumero()
-                                , contactEtudiant1.getNom(), contactEtudiant1.getDesignation()));
-                    });
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                    LocalDate date;
-                    date = LocalDate.parse(studentRequest.getDate(), formatter);
-                    EtatInscription etatInscription = etatInscriptionDao.findByNom(studentRequest.getEtatInscrit());
-                    insecriptionDao.save(new Inscription(etudiants, studentRequest.getNumeroInscrit(), date, etatInscription));
-                }
+                Etudiants etudiants = etudiantsDao.save(new Etudiants(personne1));
+                studentRequest.getDiplomeRequest().forEach(diplomeRequest -> {
+                    Diplome diplome = diplomeDao.save(new Diplome(diplomeRequest.getNomDiplome()));
+                    diplomeEtudiantDao.save(new DiplomeEtudiant(diplome, etudiants, diplomeRequest.getAnnee(), diplomeRequest.getSpecialite(),
+                        diplomeRequest.getNiveau(), diplomeRequest.getStatus(), diplomeRequest.getEtablissement()));
+                });
+                studentRequest.getContactEtudiants().forEach(contactEtudiant1 -> {
+                    contactEtudiant.save(new ContactEtudiant(etudiants, contactEtudiant1.getNumero()
+                        , contactEtudiant1.getNom(), contactEtudiant1.getDesignation()));
+                });
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                LocalDate date;
+                date = LocalDate.parse(studentRequest.getDate(), formatter);
+                EtatInscription etatInscription = etatInscriptionDao.findByNom(studentRequest.getEtatInscrit());
+                insecriptionDao.save(new Inscription(etudiants, studentRequest.getNumeroInscrit(), date, etatInscription));
+            }
 
         );
 

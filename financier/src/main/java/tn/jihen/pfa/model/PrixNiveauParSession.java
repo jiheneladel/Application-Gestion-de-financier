@@ -2,23 +2,24 @@ package tn.jihen.pfa.model;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+
 @Entity
 public class PrixNiveauParSession {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Niveau niveau;
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Session session;
     private float montantNiveau;
     private LocalDate date;
 
-    public PrixNiveauParSession(Niveau niveau, Session session,float montantNiveau, LocalDate date) {
+    public PrixNiveauParSession(Niveau niveau, Session session, float montantNiveau, LocalDate date) {
         this.id = id;
         this.niveau = niveau;
         this.session = session;
-        this.montantNiveau= montantNiveau;
+        this.montantNiveau = montantNiveau;
         this.date = date;
     }
 
@@ -68,11 +69,11 @@ public class PrixNiveauParSession {
     @Override
     public String toString() {
         return "PrixNiveauParSession{" +
-                "id=" + id +
-                ", niveau=" + niveau +
-                ", session=" + session +
-                ", montantNiveau=" + montantNiveau +
-                ", date=" + date +
-                '}';
+            "id=" + id +
+            ", niveau=" + niveau +
+            ", session=" + session +
+            ", montantNiveau=" + montantNiveau +
+            ", date=" + date +
+            '}';
     }
 }

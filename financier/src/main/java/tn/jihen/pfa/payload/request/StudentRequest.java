@@ -8,17 +8,8 @@ import java.util.List;
 
 public class StudentRequest {
     @NotNull
-    private  int idPersonne;
+    private int idPersonne;
     private List<ContactEtudiant> contactEtudiants;
-
-    public List<ContactEtudiant> getContactEtudiants() {
-        return contactEtudiants;
-    }
-
-    public void setContactEtudiants(List<ContactEtudiant> contactEtudiants) {
-        this.contactEtudiants = contactEtudiants;
-    }
-
     @NotBlank
     private String numeroInscrit;
     @NotBlank
@@ -27,6 +18,14 @@ public class StudentRequest {
     private String date;
     @NotBlank
     private List<DiplomeRequest> diplomeRequest;
+
+    public List<ContactEtudiant> getContactEtudiants() {
+        return contactEtudiants;
+    }
+
+    public void setContactEtudiants(List<ContactEtudiant> contactEtudiants) {
+        this.contactEtudiants = contactEtudiants;
+    }
 
     public int getIdPersonne() {
         return idPersonne;

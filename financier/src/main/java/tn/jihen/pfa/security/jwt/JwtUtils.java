@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import tn.jihen.pfa.security.service.CompteDetailsImpl;
 
 import java.util.Date;
+
 @Component
 public class JwtUtils {
     private static final Logger LOGGER = LoggerFactory.getLogger(JwtUtils.class);
@@ -20,14 +21,14 @@ public class JwtUtils {
     public String generateJwtToken(Authentication authentication) {
         CompteDetailsImpl compteDetails = (CompteDetailsImpl) authentication.getPrincipal();
         return Jwts.builder()
-                .setSubject((compteDetails.getUsername()))
-                .setIssuedAt(new Date())
-                .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
-                .signWith(SignatureAlgorithm.HS512, jwtSecret)
-                .compact();
+            .setSubject((compteDetails.getUsername()))
+            .setIssuedAt(new Date())
+            .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
+            .signWith(SignatureAlgorithm.HS512, jwtSecret)
+            .compact();
     }
 
-    public String getUserNameFromJwtToken(String token){
+    public String getUserNameFromJwtToken(String token) {
         return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
     }
 
@@ -39,7 +40,7 @@ public class JwtUtils {
             LOGGER.error("Invalid JWT token signature: {}", e.getMessage());
         } catch (MalformedJwtException e) {
             LOGGER.error("Invalid JWT token : {}", e.getMessage());
-        } catch ( ExpiredJwtException e) {
+        } catch (ExpiredJwtException e) {
             LOGGER.error(" JWT token expired: {}", e.getMessage());
         } catch (UnsupportedJwtException e) {
             LOGGER.error("JWT token unsupported: {}", e.getMessage());

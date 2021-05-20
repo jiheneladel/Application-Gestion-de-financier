@@ -7,6 +7,7 @@ import tn.jihen.pfa.model.PrixNiveauParSession;
 import tn.jihen.pfa.model.Session;
 
 import java.util.Collection;
+
 @Repository
 public interface PrixNiveauParSessionDao extends JpaRepository<PrixNiveauParSession, Integer> {
     Collection<PrixNiveauParSession> findAllBySession(Session session);

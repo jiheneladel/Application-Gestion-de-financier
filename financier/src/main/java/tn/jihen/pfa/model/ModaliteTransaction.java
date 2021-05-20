@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDate;
+
 @Entity
 public class ModaliteTransaction {
     @Id
@@ -68,11 +69,11 @@ public class ModaliteTransaction {
     @Override
     public String toString() {
         return "ModaliteTransaction{" +
-                "id=" + id +
-                ", numero='" + numero + '\'' +
-                ", montant=" + montant +
-                ", type='" + type + '\'' +
-                ", date=" + date +
-                '}';
+            "id=" + id +
+            ", numero='" + numero + '\'' +
+            ", montant=" + montant +
+            ", type='" + type + '\'' +
+            ", date=" + date +
+            '}';
     }
 }

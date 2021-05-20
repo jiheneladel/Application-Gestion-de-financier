@@ -2,6 +2,7 @@ package tn.jihen.pfa.model;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+
 @Entity
 public class Inscription {
     @Id
@@ -67,11 +68,11 @@ public class Inscription {
     @Override
     public String toString() {
         return "Inscription{" +
-                "idInscription=" + idInscription +
-                ", idEtudiant=" + idEtudiant +
-                ", numeroInscription='" + numeroInscription + '\'' +
-                ", date=" + date +
-                ", idEtatInscription=" + idEtatInscription +
-                '}';
+            "idInscription=" + idInscription +
+            ", idEtudiant=" + idEtudiant +
+            ", numeroInscription='" + numeroInscription + '\'' +
+            ", date=" + date +
+            ", idEtatInscription=" + idEtatInscription +
+            '}';
     }
 }

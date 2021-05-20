@@ -7,7 +7,7 @@ public class Parcours {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idParcours;
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Specialite specialite;
     private String designation;
     private String description;
@@ -57,10 +57,10 @@ public class Parcours {
     @Override
     public String toString() {
         return "Parcours{" +
-                "idParcours=" + idParcours +
-                ", specialite=" + specialite +
-                ", designation='" + designation + '\'' +
-                ", description='" + description + '\'' +
-                '}';
+            "idParcours=" + idParcours +
+            ", specialite=" + specialite +
+            ", designation='" + designation + '\'' +
+            ", description='" + description + '\'' +
+            '}';
     }
 }

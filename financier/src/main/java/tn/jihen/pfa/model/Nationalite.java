@@ -7,7 +7,8 @@ import javax.persistence.Id;
 
 @Entity
 public class Nationalite {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer ID_Nationalite;
     private String libelle;
 
@@ -38,8 +39,8 @@ public class Nationalite {
     @Override
     public String toString() {
         return "Nationalite{" +
-                "ID_Nationalite=" + ID_Nationalite +
-                ", libelle='" + libelle + '\'' +
-                '}';
+            "ID_Nationalite=" + ID_Nationalite +
+            ", libelle='" + libelle + '\'' +
+            '}';
     }
 }

@@ -7,7 +7,7 @@ public class Specialite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idSpecialite;
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Cycle cycle;
     private String designation;
     private String description;
@@ -57,10 +57,10 @@ public class Specialite {
     @Override
     public String toString() {
         return "Specialite{" +
-                "idSpecialite=" + idSpecialite +
-                ", cycle=" + cycle +
-                ", designation='" + designation + '\'' +
-                ", description='" + description + '\'' +
-                '}';
+            "idSpecialite=" + idSpecialite +
+            ", cycle=" + cycle +
+            ", designation='" + designation + '\'' +
+            ", description='" + description + '\'' +
+            '}';
     }
 }

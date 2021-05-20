@@ -14,12 +14,13 @@ import java.util.Arrays;
 public class FinancierApplication {
     @Autowired
     RoleDao roleDao;
+
     public static void main(String[] args) {
         SpringApplication.run(FinancierApplication.class, args);
     }
 
     @PostConstruct
-    public void enregistrer(){
+    public void enregistrer() {
         ERole[] values = ERole.values();
         roleDao.deleteAll();
         roleDao.flush();

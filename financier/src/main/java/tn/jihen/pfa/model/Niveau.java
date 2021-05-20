@@ -7,7 +7,7 @@ public class Niveau {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idNiveau;
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Parcours parcours;
     private String designation;
     private String description;
@@ -57,10 +57,10 @@ public class Niveau {
     @Override
     public String toString() {
         return "Niveau{" +
-                "idNiveau=" + idNiveau +
-                ", parcours=" + parcours +
-                ", designation='" + designation + '\'' +
-                ", description='" + description + '\'' +
-                '}';
+            "idNiveau=" + idNiveau +
+            ", parcours=" + parcours +
+            ", designation='" + designation + '\'' +
+            ", description='" + description + '\'' +
+            '}';
     }
 }

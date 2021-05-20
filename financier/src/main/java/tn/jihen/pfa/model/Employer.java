@@ -99,14 +99,14 @@ public class Employer {
     @Override
     public String toString() {
         return "Employer{" +
-                "idEmployer=" + idEmployer +
-                ", NCNSS='" + NCNSS + '\'' +
-                ", observation='" + observation + '\'' +
-                ", situationM='" + situationM + '\'' +
-                ", NBEnfant=" + NBEnfant +
-                ", IMG='" + IMG + '\'' +
-                ", dateEntree=" + dateEntree +
-                ", idPersonne=" + idPersonne +
-                '}';
+            "idEmployer=" + idEmployer +
+            ", NCNSS='" + NCNSS + '\'' +
+            ", observation='" + observation + '\'' +
+            ", situationM='" + situationM + '\'' +
+            ", NBEnfant=" + NBEnfant +
+            ", IMG='" + IMG + '\'' +
+            ", dateEntree=" + dateEntree +
+            ", idPersonne=" + idPersonne +
+            '}';
     }
 }

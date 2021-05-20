@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import tn.jihen.pfa.model.Nationalite;
 
 @Repository
-public interface NationaliteDao extends JpaRepository<Nationalite,Integer> {
+public interface NationaliteDao extends JpaRepository<Nationalite, Integer> {
     Nationalite findByLibelle(String libelle);
 }

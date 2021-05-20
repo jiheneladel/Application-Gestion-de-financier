@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import tn.jihen.pfa.model.Identificateur;
 
 @Repository
-public interface IdentificateurDao extends JpaRepository<Identificateur,Integer> {
+public interface IdentificateurDao extends JpaRepository<Identificateur, Integer> {
     Identificateur findByTypeIdentificateur(String typeIdentificateur);
 }

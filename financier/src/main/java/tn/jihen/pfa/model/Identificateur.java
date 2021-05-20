@@ -7,11 +7,12 @@ import javax.persistence.Id;
 
 @Entity
 public class Identificateur {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-   private Integer idTypeidentificateur;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer idTypeidentificateur;
     private String typeIdentificateur;
 
-    public Identificateur( String typeIdentificateur) {
+    public Identificateur(String typeIdentificateur) {
         this.typeIdentificateur = typeIdentificateur;
     }
 
@@ -37,9 +38,9 @@ public class Identificateur {
     @Override
     public String toString() {
         return "Identificateur{" +
-                "ID_TypeIdentificateur=" + idTypeidentificateur +
-                ", TypeIdentificateur='" + typeIdentificateur + '\'' +
-                '}';
+            "ID_TypeIdentificateur=" + idTypeidentificateur +
+            ", TypeIdentificateur='" + typeIdentificateur + '\'' +
+            '}';
     }
 
 

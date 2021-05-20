@@ -1,9 +1,5 @@
 package tn.jihen.pfa.model;
 
-import javax.persistence.*;
-import java.time.LocalDate;
-import java.util.Objects;
-
 public class TransactionCopy {
   /*  @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

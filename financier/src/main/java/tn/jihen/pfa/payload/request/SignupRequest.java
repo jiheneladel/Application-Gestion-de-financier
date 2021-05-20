@@ -26,6 +26,13 @@ public class SignupRequest {
     private String lieuDeNaissance;
     @NotBlank
     private String typeIdentificateur;
+    @NotBlank
+    private String numeroIdentificateur;
+    @NotBlank
+    private String sexe;
+    @NotBlank
+    private String nationalite;
+    private Set<String> role;
 
     public String getTypeIdentificateur() {
         return typeIdentificateur;
@@ -42,14 +49,6 @@ public class SignupRequest {
     public void setNumeroIdentificateur(String numeroIdentificateur) {
         this.numeroIdentificateur = numeroIdentificateur;
     }
-
-    @NotBlank
-    private String numeroIdentificateur;
-    @NotBlank
-    private String sexe;
-    @NotBlank
-    private String nationalite;
-    private Set<String> role;
 
     public String getLogin() {
         return login;
@@ -122,7 +121,6 @@ public class SignupRequest {
     public void setLieuDeNaissance(String lieuDeNaissance) {
         this.lieuDeNaissance = lieuDeNaissance;
     }
-
 
 
     public String getSexe() {

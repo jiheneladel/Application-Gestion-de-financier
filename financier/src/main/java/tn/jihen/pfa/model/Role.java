@@ -4,7 +4,8 @@ import javax.persistence.*;
 
 @Entity
 public class Role {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Enumerated(EnumType.STRING)
     private ERole role;
@@ -35,8 +36,8 @@ public class Role {
     @Override
     public String toString() {
         return "Role{" +
-                "Id_Role=" + id +
-                ", role='" + role + '\'' +
-                '}';
+            "Id_Role=" + id +
+            ", role='" + role + '\'' +
+            '}';
     }
 }

@@ -7,21 +7,22 @@ import java.util.Objects;
 @Entity
 @Table
 public class Personne {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-   private Integer idPersonne;
-   private String nom;
-   private String prenom;
-   private String mail;
-   private String adresse;
-   private String tel;
-   private LocalDate dateDeNaissance;
-   private String lieuDeNaissance;
-   @OneToOne(cascade=CascadeType.ALL)
-   private Identificateur idIdentificateur;
-   private String numeroIdentificateur;
-   private String sexe;
-   @OneToOne(cascade=CascadeType.ALL)
-   private Nationalite idNationalite;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer idPersonne;
+    private String nom;
+    private String prenom;
+    private String mail;
+    private String adresse;
+    private String tel;
+    private LocalDate dateDeNaissance;
+    private String lieuDeNaissance;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Identificateur idIdentificateur;
+    private String numeroIdentificateur;
+    private String sexe;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Nationalite idNationalite;
 
 
     public Personne(String nom, String prenom, String mail, String adresse, String tel, LocalDate dateDeNaissance, String lieuDeNaissance, Identificateur id_Identificateur, String numeroIdentificateur, String sexe, Nationalite ID_Nationalite) {
@@ -153,18 +154,18 @@ public class Personne {
     @Override
     public String toString() {
         return "Personne{" +
-                "ID_Personne=" + idPersonne +
-                ", nom='" + nom + '\'' +
-                ", prenom='" + prenom + '\'' +
-                ", mail='" + mail + '\'' +
-                ", adresse='" + adresse + '\'' +
-                ", tel='" + tel + '\'' +
-                ", DateDeNaissance=" + dateDeNaissance +
-                ", LieuDeNaissance='" + lieuDeNaissance + '\'' +
-                ", Id_Identificateur=" + idIdentificateur +
-                ", numero_Identificateur='" + numeroIdentificateur + '\'' +
-                ", sexe='" + sexe + '\'' +
-                ", ID_Nationalite=" + idNationalite +
-                '}';
+            "ID_Personne=" + idPersonne +
+            ", nom='" + nom + '\'' +
+            ", prenom='" + prenom + '\'' +
+            ", mail='" + mail + '\'' +
+            ", adresse='" + adresse + '\'' +
+            ", tel='" + tel + '\'' +
+            ", DateDeNaissance=" + dateDeNaissance +
+            ", LieuDeNaissance='" + lieuDeNaissance + '\'' +
+            ", Id_Identificateur=" + idIdentificateur +
+            ", numero_Identificateur='" + numeroIdentificateur + '\'' +
+            ", sexe='" + sexe + '\'' +
+            ", ID_Nationalite=" + idNationalite +
+            '}';
     }
 }
