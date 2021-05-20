@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/trans/")
+@RequestMapping("/api/pay/")
 //@PreAuthorize("hasRole('ADMIN')")
 public class PayementRest {
 
