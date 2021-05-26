@@ -22,8 +22,8 @@ public class FinancierApplication {
     @PostConstruct
     public void enregistrer() {
         ERole[] values = ERole.values();
-        roleDao.deleteAll();
-        roleDao.flush();
+        //roleDao.deleteAll();
+        //roleDao.flush();
 /*        for(int i=0; i< values.length ;i++){
             Role role = new Role(values[i]);
             roleDao.save(role);
