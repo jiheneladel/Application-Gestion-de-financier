@@ -21,13 +21,14 @@ public class FinancierApplication {
 
     @PostConstruct
     public void enregistrer() {
-        ERole[] values = ERole.values();
+        /*ERole[] values = ERole.values();
         roleDao.deleteAll();
         roleDao.flush();
        for(int i=0; i< values.length ;i++){
             Role role = new Role(values[i]);
-            roleDao.save(role);
-        }
-        Arrays.stream(values).forEach(eRole -> roleDao.save(new Role(eRole)));
+        //    roleDao.save(role);
+
+        Arrays.stream(values).forEach(eRole -> roleDao.save(new Role(eRole)));*/
+        System.out.println("hehe");
     }
 }
