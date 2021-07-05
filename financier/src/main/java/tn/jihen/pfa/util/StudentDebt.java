@@ -9,6 +9,7 @@ import tn.jihen.pfa.dao.TransactionDao;
 import tn.jihen.pfa.model.*;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @Component
 public class StudentDebt {
@@ -22,12 +23,20 @@ public class StudentDebt {
     EnregistrementDao enregistrementDao;
 
     public double debt(Etudiants etudiants, Session session) {
+        System.out.println("debt enter");
         Collection<Transaction> transactions = transactionDao.findAllByIdClientAndSession(etudiants.getIdPersonne(), session);
         Inscription inscription = insecriptionDao.findByIdEtudiant(etudiants);
+        System.out.println(session);
         Enregistrement enregistrement = enregistrementDao.findByIdInscriptionAndAndIdSession(inscription, session);
-        PrixNiveauParSession prixNiveauParSession = prixNiveauParSessionDao.findBySessionAndNiveau(session, enregistrement.getIdNiveau());
+        System.out.println(enregistrement);
 
-        double sum = transactions.stream().filter(transaction -> transaction.getType().equals(ETypeTransaction.CREDIT.name())).mapToDouble(Transaction::getMontant).sum();
-        return prixNiveauParSession.getMontantNiveau() - sum;
+        Optional<PrixNiveauParSession> prixNiveauParSession = prixNiveauParSessionDao.findBySessionAndNiveau(session, enregistrement.getIdNiveau());
+        System.out.println(prixNiveauParSession.isPresent());
+        System.out.println(prixNiveauParSession.isPresent());
+        double sum =0 ;
+        if (!transactions.isEmpty()){
+            sum = transactions.stream().filter(transaction -> transaction.getType().equals(ETypeTransaction.CREDIT.name())).mapToDouble(Transaction::getMontant).sum();
+        }
+        return prixNiveauParSession.get().getMontantNiveau() - sum;
     }
 }
